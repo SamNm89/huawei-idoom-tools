@@ -25,46 +25,128 @@ A comprehensive Python-based AI automation agent that **bypasses hidden firmware
 
 ## 📋 Requirements
 
-- Python 3.8+
-- Huawei LTE router (E5573, E5785, or similar)
-- Network connection to router (192.168.8.1)
+- **Python 3.8+** (with virtual environment support)
+- **Huawei LTE router** (E5573, E5785, or similar)
+- **Network connection** to router (192.168.8.1)
+- **Virtual environment** (recommended for stability and dependency isolation)
+
+**System Requirements:**
+- **Windows**: PowerShell or Command Prompt
+- **Linux/Mac**: Bash terminal
+- **Storage**: ~100MB for dependencies and logs
+- **Memory**: ~50MB RAM during operation
 
 ## 🛠️ Installation
 
-1. **Clone the repository**:
-   ```bash
-   git clone <repository-url>
-   cd router
-   ```
+### **Step 1: Clone the Repository**
+```bash
+git clone <repository-url>
+cd router
+```
 
-2. **Install dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
+### **Step 2: Set Up Virtual Environment (Recommended for Stability)**
 
-3. **Configure router credentials**:
-   ```bash
-   cp env_example.txt .env
-   # Edit .env with your router credentials
-   ```
+**Why Virtual Environment?**
+- **Isolates dependencies** from your system Python
+- **Prevents conflicts** between different projects
+- **Ensures consistent behavior** across different systems
+- **Makes the project more portable** and reliable
+- **Easier to manage** package versions
 
-4. **Update router settings** (if needed):
-   ```bash
-   # Edit config.py to customize:
-   # - Router IP address
-   # - LTE band configurations
-   # - Monitoring intervals
-   # - Signal thresholds
-   ```
+**Create and Activate Virtual Environment:**
+
+**Windows (PowerShell):**
+```powershell
+# Create virtual environment
+python -m venv .venv
+
+# Activate virtual environment
+.venv\Scripts\Activate.ps1
+
+# You'll see (.venv) in your prompt when activated
+```
+
+**Windows (Command Prompt):**
+```cmd
+# Create virtual environment
+python -m venv .venv
+
+# Activate virtual environment
+.venv\Scripts\activate.bat
+```
+
+**Linux/Mac:**
+```bash
+# Create virtual environment
+python3 -m venv .venv
+
+# Activate virtual environment
+source .venv/bin/activate
+```
+
+### **Step 3: Install Dependencies**
+```bash
+# Make sure virtual environment is activated (you'll see (.venv) in prompt)
+pip install -r requirements.txt
+```
+
+### **Step 4: Configure Router Credentials**
+```bash
+# Copy environment template
+cp env_example.txt .env
+
+# Edit .env with your router credentials
+# Use a text editor that saves in UTF-8 encoding
+notepad .env  # Windows
+# or
+nano .env     # Linux/Mac
+```
+
+**Important:** Save the `.env` file with **UTF-8 encoding** to avoid Unicode errors.
+
+### **Step 5: Update Router Settings (Optional)**
+```bash
+# Edit config.py to customize:
+# - Router IP address
+# - LTE band configurations
+# - Monitoring intervals
+# - Signal thresholds
+```
 
 ## 🚀 Quick Start
 
-### Interactive Mode
+### **Virtual Environment Management**
+
+**Activate Virtual Environment Before Running:**
 ```bash
+# Windows (PowerShell)
+.venv\Scripts\Activate.ps1
+
+# Windows (Command Prompt)
+.venv\Scripts\activate.bat
+
+# Linux/Mac
+source .venv/bin/activate
+```
+
+**Verify Activation:**
+- You should see `(.venv)` at the beginning of your command prompt
+- This ensures you're using the isolated Python environment
+
+**Deactivate When Done:**
+```bash
+deactivate
+```
+
+### **Running the Application**
+
+**Interactive Mode:**
+```bash
+# Make sure virtual environment is activated first
 python main.py
 ```
 
-### Automated Mode
+**Automated Mode:**
 ```bash
 # Test all bands
 python main.py --test-bands
@@ -82,23 +164,41 @@ python main.py --optimize
 python main.py --automated
 ```
 
-### Direct Band Configuration
+**Direct Band Configuration:**
 ```bash
 # Apply your specific band configuration
 python apply_band_config.py
+```
+
+**Alternative: Run Without Activating (One-liner):**
+```bash
+# Windows
+.venv\Scripts\python.exe main.py
+
+# Linux/Mac
+.venv/bin/python main.py
 ```
 
 ## 📖 How to Use
 
 ### **1. Initial Setup**
 
-#### **Step 1: Install Dependencies**
+#### **Step 1: Set Up Virtual Environment**
 ```bash
-# Activate virtual environment (if using)
-.venv\Scripts\Activate.ps1  # Windows
+# Create virtual environment (if not already created)
+python -m venv .venv
+
+# Activate virtual environment
+.venv\Scripts\Activate.ps1  # Windows (PowerShell)
+.venv\Scripts\activate.bat  # Windows (Command Prompt)
 source .venv/bin/activate   # Linux/Mac
 
-# Install dependencies
+# Verify activation - you should see (.venv) in your prompt
+```
+
+#### **Step 2: Install Dependencies**
+```bash
+# Make sure virtual environment is activated
 pip install -r requirements.txt
 ```
 
@@ -329,6 +429,49 @@ success = agent.set_band_configuration(band_config)
 - **Performance Dashboards**: Comprehensive summaries
 
 ### **7. Troubleshooting Common Issues**
+
+#### **Virtual Environment Issues**
+
+**Problem: "python is not recognized"**
+```bash
+# Make sure virtual environment is activated
+.venv\Scripts\Activate.ps1  # Windows
+source .venv/bin/activate   # Linux/Mac
+
+# Verify activation - you should see (.venv) in prompt
+```
+
+**Problem: "ModuleNotFoundError"**
+```bash
+# Reinstall dependencies in virtual environment
+pip install -r requirements.txt
+
+# Or upgrade pip first
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+**Problem: Virtual environment not activating**
+```bash
+# Check if .venv directory exists
+ls .venv
+
+# If not, recreate virtual environment
+rm -rf .venv  # Linux/Mac
+# or
+rmdir /s .venv  # Windows
+
+python -m venv .venv
+.venv\Scripts\Activate.ps1  # Windows
+source .venv/bin/activate   # Linux/Mac
+```
+
+**Problem: Permission errors on Windows**
+```powershell
+# Run PowerShell as Administrator
+# Or change execution policy
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
 
 #### **Authentication Problems**
 ```bash
