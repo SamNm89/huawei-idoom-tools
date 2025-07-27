@@ -1,0 +1,14 @@
+# Huawei LTE Router Configuration
+# Copy this file to .env and update with your router credentials
+
+# Router IP Address (default: 192.168.8.1)
+ROUTER_IP=192.168.8.1
+
+# Router Username (default: admin)
+ROUTER_USERNAME=admin
+
+# Router Password (default: admin)
+ROUTER_PASSWORD=admin
+
+# Optional: Custom router model (if different from default)
+# ROUTER_MODEL=Huawei_E5573 
